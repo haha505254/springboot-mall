@@ -19,7 +19,7 @@ public class ProductController {
 	@GetMapping("/products/{productid}")
 	public ResponseEntity<Product> getProduct(@PathVariable Integer productid){
 		Product product = productService.getProductById(productid);
-		if (productid != null) {
+		if (product != null) {
 			return ResponseEntity.status(HttpStatus.OK).body(product);
 			
 		}else {
