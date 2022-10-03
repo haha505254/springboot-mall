@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.jacklin.springboot_mall.constant.ProductCategory;
 import com.jacklin.springboot_mall.dao.ProductDao;
+import com.jacklin.springboot_mall.dto.ProductQueryParams;
 import com.jacklin.springboot_mall.dto.ProductRequest;
 import com.jacklin.springboot_mall.model.Product;
 import com.jacklin.springboot_mall.service.ProductService;
@@ -44,9 +44,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getProducts(ProductCategory categoey,String search) {
+	public List<Product> getProducts(ProductQueryParams productQueryParams) {
 		// TODO Auto-generated method stub
-		return productDao.getProducts(categoey,search);
+		return productDao.getProducts(productQueryParams);
 	}
 
 }

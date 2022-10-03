@@ -17,62 +17,65 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jacklin.springboot_mall.constant.ProductCategory;
+import com.jacklin.springboot_mall.dto.ProductQueryParams;
 import com.jacklin.springboot_mall.dto.ProductRequest;
 import com.jacklin.springboot_mall.model.Product;
 import com.jacklin.springboot_mall.service.ProductService;
 
 @RestController
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService productService;
-	
+
 	@GetMapping("/products")
-	public ResponseEntity<List<Product>> getProducts(
-			@RequestParam(required = false) ProductCategory category,
-			@RequestParam(required = false) String search
-			) {
-		 List<Product> productList = productService.getProducts(category,search);
-		 
-		 return ResponseEntity.status(HttpStatus.OK).body(productList);
+	public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) ProductCategory category,
+			@RequestParam(required = false) String search) {
+		ProductQueryParams productQueryParams = new ProductQueryParams();
+		productQueryParams.setCategory(category);
+		productQueryParams.setSearch(search);
+
+		List<Product> productList = productService.getProducts(productQueryParams);
+
+		return ResponseEntity.status(HttpStatus.OK).body(productList);
 	}
-	
+
 	@GetMapping("/products/{productid}")
-	public ResponseEntity<Product> getProduct(@PathVariable Integer productid){
+	public ResponseEntity<Product> getProduct(@PathVariable Integer productid) {
 		Product product = productService.getProductById(productid);
 		if (product != null) {
 			return ResponseEntity.status(HttpStatus.OK).body(product);
-			
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();		
-			}
+
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
-	
+
 	@PostMapping("/products")
 	public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest) {
-		 Integer productId =  productService.createProduct(productRequest);
-		 Product product = productService.getProductById(productId);
-		 return ResponseEntity.status(HttpStatus.CREATED).body(product);
-		
+		Integer productId = productService.createProduct(productRequest);
+		Product product = productService.getProductById(productId);
+		return ResponseEntity.status(HttpStatus.CREATED).body(product);
+
 	}
-	
-	 
+
 	@PutMapping("/products/{productId}")
-	public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,@RequestBody @Valid ProductRequest productRequest) {
+	public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
+			@RequestBody @Valid ProductRequest productRequest) {
 		Product product = productService.getProductById(productId);
 		if (product == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
-		
-		productService.updateProduct(productId,productRequest);
+
+		productService.updateProduct(productId, productRequest);
 		Product updateProduct = productService.getProductById(productId);
 		return ResponseEntity.status(HttpStatus.OK).body(updateProduct);
 	}
-	
+
 	@DeleteMapping("/products/{productId}")
 	public ResponseEntity<?> deleteProduct(@PathVariable Integer productId) {
 		productService.deleteProductById(productId);
-		
+
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
