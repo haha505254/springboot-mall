@@ -1,9 +1,13 @@
 package com.jacklin.springboot_mall.dao;
 
+import java.util.List;
+
 import com.jacklin.springboot_mall.dto.ProductRequest;
 import com.jacklin.springboot_mall.model.Product;
 
 public interface ProductDao {
+	
+	List<Product> getProducts();
 	
 	Product getProductById(Integer productId);
 	

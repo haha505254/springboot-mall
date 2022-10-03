@@ -1,5 +1,7 @@
 package com.jacklin.springboot_mall.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import com.jacklin.springboot_mall.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
+	
+	
 
 	@Override
 	public Product getProductById(Integer productId) {
@@ -36,6 +40,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		productDao.deleteProductById(productId);
 		
+	}
+
+	@Override
+	public List<Product> getProducts() {
+		// TODO Auto-generated method stub
+		return productDao.getProducts();
 	}
 
 }
