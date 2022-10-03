@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.jacklin.springboot_mall.constant.ProductCategoey;
+import com.jacklin.springboot_mall.constant.ProductCategory;
 import com.jacklin.springboot_mall.model.Product;
 
 public class ProductRowMapper implements RowMapper<Product> {
@@ -18,7 +18,7 @@ public class ProductRowMapper implements RowMapper<Product> {
 		
 		
 		String categoryString = rs.getString("category");
-		ProductCategoey categoey = ProductCategoey.valueOf(categoryString);
+		ProductCategory categoey = ProductCategory.valueOf(categoryString);
 		product.setCategory(categoey);
 		
 		product.setImage_url(rs.getString("image_url"));

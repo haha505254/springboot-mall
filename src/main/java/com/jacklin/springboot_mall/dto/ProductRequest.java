@@ -3,14 +3,14 @@ package com.jacklin.springboot_mall.dto;
 
 import javax.validation.constraints.NotNull;
 
-import com.jacklin.springboot_mall.constant.ProductCategoey;
+import com.jacklin.springboot_mall.constant.ProductCategory;
 
 public class ProductRequest {
 	
 	@NotNull
 	private String product_name      ;
 	@NotNull
-	private ProductCategoey category          ;
+	private ProductCategory category          ;
 	@NotNull
 	private String image_url         ;
 	@NotNull
@@ -25,10 +25,10 @@ public class ProductRequest {
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-	public ProductCategoey getCategory() {
+	public ProductCategory getCategory() {
 		return category;
 	}
-	public void setCategory(ProductCategoey category) {
+	public void setCategory(ProductCategory category) {
 		this.category = category;
 	}
 	public String getImage_url() {

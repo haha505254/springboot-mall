@@ -2,12 +2,12 @@ package com.jacklin.springboot_mall.model;
 
 import java.util.Date;
 
-import com.jacklin.springboot_mall.constant.ProductCategoey;
+import com.jacklin.springboot_mall.constant.ProductCategory;
 
 public class Product {
 	private Integer product_id        ;
 	private String product_name      ;
-	private ProductCategoey category          ;
+	private ProductCategory category          ;
 	private String image_url         ;
 	private Integer price             ;
 	private Integer stock             ;
@@ -27,10 +27,10 @@ public class Product {
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-	public ProductCategoey getCategory() {
+	public ProductCategory getCategory() {
 		return category;
 	}
-	public void setCategory(ProductCategoey category) {
+	public void setCategory(ProductCategory category) {
 		this.category = category;
 	}
 	public String getImage_url() {
