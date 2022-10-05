@@ -49,4 +49,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getProducts(productQueryParams);
 	}
 
+	@Override
+	public Integer countProduct(ProductQueryParams productQueryParams) {
+		// TODO Auto-generated method stub
+		return productDao.countProduct(productQueryParams);
+	}
+
 }

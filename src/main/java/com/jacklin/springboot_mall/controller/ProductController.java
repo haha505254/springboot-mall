@@ -24,6 +24,7 @@ import com.jacklin.springboot_mall.dto.ProductQueryParams;
 import com.jacklin.springboot_mall.dto.ProductRequest;
 import com.jacklin.springboot_mall.model.Product;
 import com.jacklin.springboot_mall.service.ProductService;
+import com.jacklin.springboot_mall.util.Page;
 
 
 @Validated
@@ -34,7 +35,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/products")
-	public ResponseEntity<List<Product>> getProducts(
+	public ResponseEntity<Page<Product>> getProducts(
 			@RequestParam(required = false) ProductCategory category,
 			@RequestParam(required = false) String search, 
 			@RequestParam(defaultValue = "created_date") String orderBy,
@@ -52,8 +53,18 @@ public class ProductController {
 		productQueryParams.setOffset(offset);
 
 		List<Product> productList = productService.getProducts(productQueryParams);
-
-		return ResponseEntity.status(HttpStatus.OK).body(productList);
+		
+		Integer total = productService.countProduct(productQueryParams);
+		
+		Page<Product> page = new Page<>();
+		page.setLimit(limit);
+		page.setOffset(offset);
+		page.setTotal(total);
+		page.setResults(productList);
+		
+		
+		
+		return ResponseEntity.status(HttpStatus.OK).body(page);
 	}
 
 	@GetMapping("/products/{productid}")
